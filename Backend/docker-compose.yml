@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+
+#  pgadmin:
+#    container_name: pgadmin
+#    image: dpage/pgadmin4
+#    restart: unless-stopped
+#    ports:
+#      - 5431:80
+#    volumes:
+#      - ./data/pgadmin4:/var/lib/pgadmin:z
+#    environment:
+#      - PGADMIN_DEFAULT_EMAIL=am_882011@live.com
+#      - PGADMIN_DEFAULT_PASSWORD=pass
