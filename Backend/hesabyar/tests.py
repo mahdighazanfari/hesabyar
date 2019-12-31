@@ -23,13 +23,15 @@ class APITestCase(TestCase):
         assert resp['status'] == 'ok'
         print('new tran ok')
         resp = json.loads(c.post('/transaction/get', {'user': 1}).content)
+        print(resp)
         resp = json.loads(
             c.post('/transaction/edit', {'transaction': 1, 'amount': 20, 'category': 2, 'members': [2]}).content)
         assert resp['status'] == 'ok'
         print('edit tran ok')
         resp = json.loads(c.post('/transaction/get', {'user': 1}).content)
+        print(resp)
         resp = json.loads(c.post('/transaction/delete', {'transaction': 1}).content)
         assert resp['status'] == 'ok'
         print('delete tran ok')
         resp = json.loads(c.post('/transaction/get', {'user': 1}).content)
-
+        print(resp)
