@@ -21,7 +21,7 @@ class Transaction(models.Model):
 
 
 class TransactionMember(models.Model):
-    transaction = models.ForeignKey(Transaction, on_delete=None)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
     member = models.ForeignKey(User, on_delete=None)
 
 
