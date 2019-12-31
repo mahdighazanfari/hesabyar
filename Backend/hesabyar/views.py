@@ -15,11 +15,14 @@ def index(request):
 
 @csrf_exempt
 def login(request):
-    user = authenticate(username=request['user'], password=request['pass'])
-    if user is not None:
-        return JsonResponse(
-            json.loads((serializers.serialize("json", user))), safe=False)
-    else:
+    try:
+        user = authenticate(username=request.POST['user'], password=request.POST['password'])
+        if user is not None:
+            return JsonResponse({'user': user.pk})
+        else:
+            return JsonResponse({"status": "error", "msg": "user not found"}, status=404)
+    except Exception as e:
+        print(e)
         return JsonResponse({"status": "error"})
 
 
@@ -27,8 +30,9 @@ def login(request):
 def get_contacts(request):
     try:
         return JsonResponse(
-            json.loads((serializers.serialize("json", Contact.objects.filter(user=request.body['user'])))), safe=False)
-    except:
+            json.loads((serializers.serialize("json", Contact.objects.filter(user=request.POST['user'])))), safe=False)
+    except Exception as e:
+        print(e)
         return JsonResponse({"status": "error"})
 
 
@@ -36,30 +40,32 @@ def get_contacts(request):
 def get_transactions(request):
     try:
         return JsonResponse(
-            json.loads((serializers.serialize("json", Transaction.objects.filter(user=request.body['user'])))),
+            json.loads((serializers.serialize("json", Transaction.objects.filter(user=request.POST['user'])))),
             safe=False)
-    except:
+    except Exception as e:
+        print(e)
         return JsonResponse({"status": "error"})
 
 
 @csrf_exempt
 def add_transaction(request):
     try:
-        tran = Transaction(user=User.objects.get(pk=request.body['user']), amount=request.body['amount'],
-                           category=request.body['category'])
+        tran = Transaction(user=User.objects.get(pk=request.POST['user']), amount=request.POST['amount'],
+                           category=request.POST['category'])
         tran.save()
-        for item in request.body['members']:
-            member = TransactionMember(transaction=tran, member=User.objects.get(pk=item['user']))
+        for item in request.POST['members']:
+            member = TransactionMember(transaction=tran, member=User.objects.get(pk=item))
             member.save()
         return JsonResponse({"status": "ok"})
-    except:
+    except Exception as e:
+        print(e)
         return JsonResponse({"status": "error"})
 
 
 @csrf_exempt
 def delete_transaction(request):
     try:
-        tran = Transaction.objects.get(pk=request.body['transaction'])
+        tran = Transaction.objects.get(pk=request.POST['transaction'])
         tran.delete()
         return JsonResponse({"status": "ok"})
     except Exception as e:
@@ -70,14 +76,15 @@ def delete_transaction(request):
 @csrf_exempt
 def edit_transaction(request):
     try:
-        tran = Transaction.objects.get(pk=request.body['transaction'])
-        tran.amount = request.body['amount']
-        tran.category = request.body['category']
+        tran = Transaction.objects.get(pk=request.POST['transaction'])
+        tran.amount = request.POST['amount']
+        tran.category = request.POST['category']
         tran.save()
         TransactionMember.objects.filter(transaction=1).delete()
-        for item in request.body['members']:
-            member = TransactionMember(transaction=tran, member=User.objects.get(pk=item['user']))
+        for item in request.POST['members']:
+            member = TransactionMember(transaction=tran, member=User.objects.get(pk=item))
             member.save()
         return JsonResponse({"status": "ok"})
-    except:
+    except Exception as e:
+        print(e)
         return JsonResponse({"status": "error"})
