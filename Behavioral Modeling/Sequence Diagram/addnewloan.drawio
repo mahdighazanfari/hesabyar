@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2020-01-28T01:11:31.534Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36" etag="U6S24kmZ0Ayx1XJNr8NK" version="12.5.8" type="github">
+<mxfile host="www.draw.io" modified="2020-01-28T01:30:02.556Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36" etag="7Mwz_Yc4-mSum4PEczMH" version="12.5.8" type="github">
   <diagram id="OXFuptE2Vq4uaXg9FuB-" name="Page-1">
     <mxGraphModel dx="1264" dy="533" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -93,7 +93,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="OGBKBctr95_yfihr8h83-31" value="InsertLoanQuery()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="OGBKBctr95_yfihr8h83-30" vertex="1" connectable="0">
+        <mxCell id="OGBKBctr95_yfihr8h83-31" value="InsertLoan_debtQuery()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="OGBKBctr95_yfihr8h83-30" vertex="1" connectable="0">
           <mxGeometry x="0.1286" relative="1" as="geometry">
             <mxPoint as="offset"/>
           </mxGeometry>
